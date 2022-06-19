@@ -1,20 +1,22 @@
+import os
+os.system('cls||clear')
+
 from multiprocessing.dummy import Value
 import numpy as np
-
 
 def validaOpcion(p_opcion):
     while True:
         try:
-            if p_opcion > 5 and p_opcion < 0:
+            if p_opcion < 6 and p_opcion > 0:
                 return p_opcion
             else:
                 print("Deja de hacer weas")
         except ValueError:
             print("XD")
-    
+
 usuario = []
-asiento = np.arange(1, 31).reshape((5, 6))
-asientoVip = np.arange(31, 43).reshape((2, 6))
+pasajeComprado = []
+asiento = np.arange(1, 43).reshape((7, 6))
 opc = 0
 
 def validador_vacio(p_algo):
@@ -38,7 +40,17 @@ while opc != 5:
     except ValueError:
         print('Tipo de valor ingresado invalido, intentelo nuevamente')
     if opc == 1:
-        print("asiento")
+        print("\nSe encuentran disponibles todos los asientos que no tengan x:\n")
+        for i in range(7):
+            for c in range(6):
+                if c == 0:
+                    print("|", asiento[i][c], end = " ")
+                elif c == 3:
+                    print("\t", asiento[i][c], end = " ")
+                else:
+                    print("", asiento[i][c], end = " ")
+            print("|")
+            print("\n")
     elif opc == 2:
         nombrePasajero = input('Ingrese su nombre => ')
         validador_vacio(nombrePasajero)
@@ -58,6 +70,11 @@ while opc != 5:
                 print("por la xuxa hermano")
         bancoPasajero = input("Ingrese su banco => ")
         validador_vacio(bancoPasajero)
+        try:
+            usuarioCompra = int(input("Ingrese el boleto que desea comprar"))
+            pasajeComprado.append(usuarioCompra)
+        except ValueError:
+            print("Ingrese solo valores numericos")
     elif opc == 3:
         print('aaa')
     elif opc == 4:
