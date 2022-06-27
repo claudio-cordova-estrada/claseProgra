@@ -4,6 +4,12 @@ os.system('cls||clear')
 from multiprocessing.dummy import Value
 import numpy as np
 
+usuario = []
+usuarioCompra = 1
+pasajeComprado = []
+asiento = np.arange(1, 43).reshape((7, 6))
+opc = 0
+
 def validaOpcion(p_opcion):
     while True:
         try:
@@ -13,11 +19,6 @@ def validaOpcion(p_opcion):
                 print("Deja de hacer weas")
         except ValueError:
             print("XD")
-
-usuario = []
-pasajeComprado = []
-asiento = np.arange(1, 43).reshape((7, 6))
-opc = 0
 
 def validador_vacio(p_algo):
     while True:
@@ -39,6 +40,8 @@ while opc != 5:
 ==> ''')))
     except ValueError:
         print('Tipo de valor ingresado invalido, intentelo nuevamente')
+
+    # Ver asientos disponibles
     if opc == 1:
         print("\nSe encuentran disponibles todos los asientos que no tengan x:\n")
         for i in range(7):
@@ -51,41 +54,90 @@ while opc != 5:
                     print("", asiento[i][c], end = " ")
             print("|")
             print("\n")
+
+    # Comprar asiento
     elif opc == 2:
+        # Datos usuario
         nombrePasajero = input('Ingrese su nombre => ')
         validador_vacio(nombrePasajero)
+
         while True:
             try:
                 rutPasajero = int(input('Ingrese su run sin codigo verificador => '))
                 break
             except ValueError:
                 print("todo mal")
+        
         dv = input('Ingrese su digito verificador => ')
         validador_vacio(dv)
+
         while True:
             try:
                 telefonoPasajero = int(input('Ingrese su número telefónico => '))
                 break
-            except:
-                print("por la xuxa hermano")
+            except ValueError:
+                print("Ingrese su numero telefonico")
+
         bancoPasajero = input("Ingrese su banco => ")
         validador_vacio(bancoPasajero)
-        try:
-            usuarioCompra = int(input("Ingrese el boleto que desea comprar"))
-            pasajeComprado.append(usuarioCompra)
-        except ValueError:
-            print("Ingrese solo valores numericos")
+
+        # Sistema de compra de boletos
+        while usuarioCompra:
+            print("\nSe encuentran disponibles todos los asientos que no tengan x:\n")
+            for i in range(7):
+                for c in range(6):
+                    if c == 0:
+                        print("|", asiento[i][c], end = " ")
+                    elif c == 3:
+                        print("\t", asiento[i][c], end = " ")
+                    else:
+                        print("", asiento[i][c], end = " ")
+                print("|")
+                print("\n")
+                try:
+                    usuarioCompra = int(input("Ingrese cuantos boletos desee comprar (oprima 0 para salir) => "))
+                except ValueError:
+                    print("Tipo de valor ingresado incorrecto")
+                if usuarioCompra != 0 and usuarioCompra > 0 and usuarioCompra <= 42:
+                    for i in pasajeComprado:
+                        if i == usuarioCompra:
+                            print("Asiento ya ocupado, intentelo nuevamente")
+                else:
+                    print("Valor ingresado se encuentra fuera del rango de pasajes, intentelo nuevamente")
+
+        usuarioCompra = 1
+        usuario.append(rutPasajero, usuarioCompra, dv, nombrePasajero, telefonoPasajero, bancoPasajero)
+
+    # Anular vuelo
     elif opc == 3:
-        print('aaa')
+        usuarioRut = int(input("Ingrese su run sin codigo verificador => "))
+
+        for usuarioDetalle in usuario:
+            if usuarioDetalle[0] != usuarioRut:
+                print("Rut ingresado no se encuentra en el sistema, intentelo nuevamente")
+            else:
+                print("Rut validado")
+                usuarioCancela = int(input("Ingrese el pasaje que desea cancelar => "))
+                if usuarioDetalle[1] != usuarioCancela:
+                    print("No posee el numero de pasaporte ingresado")
+                else:
+                    print("todo nice")
+
+    # Modificar datos pasajero
     elif opc == 4:
         print('aaaa')
+    
+    # Salir
     elif opc == 5:
         print('Muchas gracias por preferirnos!')
+
+    # Opción invalida
     else:
         print('Opción no registrada, intente con alguna opción que se encuentre en el menú')
 
+os.system('cls||clear')
 
-"""print("hola putos")
+"""print("hola p")
 lista1=[]
 lista2=[]
 x=0
