@@ -7,7 +7,7 @@ import numpy as np
 usuario = []
 usuarioCompra = 1
 pasajeComprado = []
-asiento = np.arange(1, 43).reshape((7, 6))
+asiento = np.arange(1, 43, dtype = str).reshape((7, 6))
 opc = 0
 
 def validaOpcion(p_opcion):
