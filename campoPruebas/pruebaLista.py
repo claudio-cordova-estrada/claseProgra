@@ -12,5 +12,13 @@ for i in a3D:
         print(len(c), end=" ")
 """
 
-asiento = np.chararray(1, 43)
-print(asiento)
+lista = []
+
+if lista:
+    for i in lista:
+        if i == "a":
+            print("xd")
+        else:
+            print("a")
+else:
+    print("Lista vacía")
